@@ -1,0 +1,6 @@
+export { default as IconInbox } from './assets/svg/icon_inbox.svg'
+export { default as IconLocationFilled } from './assets/svg/icon_location_filled.svg'
+export { default as IconMenu } from './assets/svg/icon_menu.svg'
+export { default as IconPartnerBadge } from './assets/svg/icon_partner_badge.svg'
+export { default as IconSearch } from './assets/svg/icon_search.svg'
+export { default as IconStar } from './assets/svg/icon_star.svg'

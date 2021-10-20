@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Animated,
   MatrixTransform,
+  NativeScrollEvent,
   PerpectiveTransform,
   RotateTransform,
   RotateXTransform,
@@ -13,12 +15,60 @@ import {
   SkewXTransform,
   SkewYTransform,
   StyleSheet,
-  Text,
   TextInput,
   TranslateXTransform,
   TranslateYTransform,
   View,
 } from 'react-native'
+import { Theme, useTheme } from 'theme'
+import { IconSearch } from 'theme/svg'
+
+type useAnimatedSearchBarType = [
+  Animated.AnimatedInterpolation,
+  Animated.AnimatedInterpolation,
+  Animated.AnimatedInterpolation,
+  (nativeEvent: NativeScrollEvent) => void
+]
+
+export const useAnimatedSearchBar = (): useAnimatedSearchBarType => {
+  const scrollY = React.useRef(new Animated.Value(0)).current
+  const diffClamp = Animated.diffClamp(scrollY, 0, 100)
+
+  const translateY = diffClamp.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -60],
+    extrapolate: 'clamp',
+  })
+
+  const marginTop = diffClamp.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -60],
+    extrapolate: 'clamp',
+  })
+
+  const opacity = diffClamp.interpolate({
+    inputRange: [0, 80, 100],
+    outputRange: [1, 0, 0],
+    extrapolate: 'clamp',
+  })
+
+  const setScrollY = useCallback(
+    (nativeEvent: NativeScrollEvent) => {
+      if (nativeEvent.contentOffset.y > 0)
+        if (
+          nativeEvent.contentOffset.y <
+          (nativeEvent.contentSize.height -
+            nativeEvent.layoutMeasurement.height) *
+            0.8
+        ) {
+          scrollY.setValue(nativeEvent.contentOffset.y)
+        }
+    },
+    [scrollY]
+  )
+
+  return [translateY, marginTop, opacity, setScrollY]
+}
 
 type AnimatedHeaderProps = {
   transform?: Animated.WithAnimatedArray<
@@ -40,6 +90,8 @@ type AnimatedHeaderProps = {
 }
 
 const AnimatedSearchBar = ({ transform, opacity }: AnimatedHeaderProps) => {
+  const { t } = useTranslation()
+  const styles = useStyles(useTheme())
   return (
     <Animated.View
       style={[
@@ -50,7 +102,8 @@ const AnimatedSearchBar = ({ transform, opacity }: AnimatedHeaderProps) => {
         },
       ]}>
       <View style={[styles.searchBar]}>
-        <TextInput />
+        <IconSearch />
+        <TextInput style={styles.input} placeholder={t('home:Search')} />
       </View>
     </Animated.View>
   )
@@ -58,21 +111,22 @@ const AnimatedSearchBar = ({ transform, opacity }: AnimatedHeaderProps) => {
 
 export default AnimatedSearchBar
 
-const styles = StyleSheet.create({
-  header: {
-    zIndex: 100,
-    paddingBottom: 10,
-  },
-  searchBar: {
-    marginHorizontal: '5%',
-    width: '90%',
-    marginTop: 40,
-    height: 40,
-    borderRadius: 10,
-    borderColor: 'lightgray',
-    borderWidth: 1,
-    backgroundColor: '#f4f4f4',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
+const useStyles = (theme: Theme) => {
+  return StyleSheet.create({
+    header: {
+      zIndex: 100,
+      paddingVertical: theme.spacing[2],
+    },
+    searchBar: {
+      marginHorizontal: theme.spacing[4],
+      width: '90%',
+      height: 40,
+      borderRadius: theme.spacing[4],
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      backgroundColor: theme.colors.inputField,
+    },
+    input: {},
+  })
+}

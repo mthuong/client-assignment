@@ -134,6 +134,7 @@ PODS:
   - GoogleUtilities/UserDefaults (7.5.2):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.0)
+  - hermes-engine (0.7.2)
   - libevent (2.1.12)
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
@@ -160,6 +161,11 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - RCT-Folly/Futures (2020.01.13.00):
+    - boost-for-react-native
+    - DoubleConversion
+    - glog
+    - libevent
   - RCTRequired (0.64.1)
   - RCTTypeSafety (0.64.1):
     - FBLazyVector (= 0.64.1)
@@ -215,6 +221,16 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-jsiexecutor (= 0.64.1)
     - React-jsinspector (= 0.64.1)
+    - React-perflogger (= 0.64.1)
+    - Yoga
+  - React-Core/Hermes (0.64.1):
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2020.01.13.00)
+    - RCT-Folly/Futures
+    - React-cxxreact (= 0.64.1)
+    - React-jsi (= 0.64.1)
+    - React-jsiexecutor (= 0.64.1)
     - React-perflogger (= 0.64.1)
     - Yoga
   - React-Core/RCTActionSheetHeaders (0.64.1):
@@ -468,6 +484,8 @@ PODS:
     - Yoga
   - RNScreens (2.18.1):
     - React-Core
+  - RNSVG (12.1.0):
+    - React
   - RNVectorIcons (8.1.0):
     - React-Core
   - SDWebImage (5.12.1):
@@ -505,6 +523,8 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (~> 0.75.1)
   - FlipperKit/SKIOSNetworkPlugin (~> 0.75.1)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - hermes-engine (~> 0.7.2)
+  - libevent (~> 2.1.12)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -512,6 +532,7 @@ DEPENDENCIES:
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
+  - React-Core/Hermes (from `../node_modules/react-native/`)
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
@@ -542,6 +563,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -567,6 +589,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
+    - hermes-engine
     - libevent
     - libwebp
     - nanopb
@@ -655,6 +678,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -685,6 +710,7 @@ SPEC CHECKSUMS:
   GoogleDataTransport: 8b0e733ea77c9218778e5a9e34ba9508b8328939
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
   GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
+  hermes-engine: 7d97ba46a1e29bacf3e3c61ecb2804a5ddd02d4f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
@@ -725,12 +751,13 @@ SPEC CHECKSUMS:
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNReanimated: 64f6c5789f82818c07ba3c71864b73619cb23c76
   RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNVectorIcons: c7abe7863f6221220414dfcac1cbde5823506d37
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SDWebImageWebPCoder: d0dac55073088d24b2ac1b191a71a8f8d0adac21
   Yoga: a7de31c64fe738607e7a3803e3f591a4b1df7393
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 47d97f4bcc20238d25fd4dfe69f3652a87459e82
+PODFILE CHECKSUM: 14c880a1b09b1426526bbd9809a8e0b27ad91c61
 
 COCOAPODS: 1.11.2

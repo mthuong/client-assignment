@@ -1,7 +1,7 @@
 import { en } from './en'
 import { vi } from './vi'
 
-export const defaultNS = 'common,chat,error,signin'
+export const defaultNS = 'common,chat,error,signin,home,'
 
 export const resources = {
   en: en,

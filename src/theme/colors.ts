@@ -22,6 +22,8 @@ export const LightTheme = {
   secondaryButton: '#F2F3F2',
 
   borderColor: '#999898',
+
+  inputField: '#F5F7FA',
 }
 
 export type Color = typeof LightTheme

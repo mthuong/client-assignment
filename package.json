@@ -11,6 +11,7 @@
     "pod": "cd ios && pod update",
     "images": "node src/theme/assets.js",
     "icons": "node src/components/Icon/script.js",
+    "svg": "node src/theme/svg-assets.js",
     "idev": "npx react-native run-ios --simulator='iPhone 11 Pro' --scheme='HelloWorld-dev'",
     "iqa": "npx react-native run-ios --scheme='MobileClient-qa'",
     "iprod": "npx react-native run-ios --scheme='MobileClient'",
@@ -53,6 +54,7 @@
     "react-native-reanimated": "^2.0.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
+    "react-native-svg": "12.1.0",
     "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.2",
     "rn-scaled-sheet": "^1.0.5",
@@ -96,6 +98,7 @@
     "metro-react-native-babel-preset": "^0.64.0",
     "react-dom": "16.13.1",
     "react-native-storybook-loader": "https://github.com/mthuong/react-native-storybook-loader.git",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "17.0.1",
     "reactotron-react-native": "^5.0.0",
     "typescript": "^4.0.2"

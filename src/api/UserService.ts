@@ -1,6 +1,5 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
-import { TUser } from 'models'
+import { isError } from 'common/func'
 
 import { ISignIn, ISignUp } from './types'
 
@@ -52,35 +51,37 @@ export async function updateUser(
   user: FirebaseAuthTypes.User,
   params: ISignUp
 ) {
-  try {
-    await firestore().collection('users').doc(user.uid).set({
-      id: user.uid,
-      name: params.name,
-      email: params.email,
-      createdAt: Date.now(),
-    })
-  } catch (error) {
-    console.tron.log(error.message)
-    throw error
-  }
+  // try {
+  //   await firestore().collection('users').doc(user.uid).set({
+  //     id: user.uid,
+  //     name: params.name,
+  //     email: params.email,
+  //     createdAt: Date.now(),
+  //   })
+  // } catch (error) {
+  //   console.tron.log(error.message)
+  //   throw error
+  // }
 }
 
 export async function getUser(uid: string) {
-  try {
-    const user = await firestore().collection<TUser>('users').doc(uid).get()
-    const data = user.data()
-    return data
-  } catch (error) {
-    console.tron.log(error.message)
-    throw error
-  }
+  // try {
+  //   const user = await firestore().collection<TUser>('users').doc(uid).get()
+  //   const data = user.data()
+  //   return data
+  // } catch (error) {
+  //   console.tron.log(error.message)
+  //   throw error
+  // }
 }
 
 export async function signOut() {
   try {
     await auth().signOut()
   } catch (error) {
-    console.tron.log(error.message)
-    throw error
+    if (isError(error)) {
+      console.tron.log(error.message)
+      throw error
+    }
   }
 }
