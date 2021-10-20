@@ -83,7 +83,6 @@ const useStyles = (theme: Theme) => {
 
     card: {
       width: '90%',
-      marginLeft: '5%',
       height: 100,
       borderRadius: theme.spacing[3],
       marginBottom: theme.spacing[4],

@@ -116,10 +116,10 @@ const useStyles = (theme: Theme) => {
     header: {
       zIndex: 100,
       paddingVertical: theme.spacing[2],
+      width: '100%',
     },
     searchBar: {
       marginHorizontal: theme.spacing[4],
-      width: '90%',
       height: 40,
       borderRadius: theme.spacing[4],
       justifyContent: 'center',
