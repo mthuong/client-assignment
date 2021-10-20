@@ -120,13 +120,17 @@ const useStyles = (theme: Theme) => {
     },
     searchBar: {
       marginHorizontal: theme.spacing[4],
-      height: 40,
+      height: theme.spacing[6],
       borderRadius: theme.spacing[4],
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row',
       backgroundColor: theme.colors.inputField,
     },
-    input: {},
+    input: {
+      ...theme.fonts.regular,
+      fontSize: theme.fontSizes.sm,
+      minWidth: '50%',
+    },
   })
 }

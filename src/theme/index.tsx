@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Appearance } from 'react-native'
 
+import fontSizes from './fonts/sizes'
 import { DarkTheme, LightTheme, ThemeName } from './colors'
 import fonts from './fonts'
 import { spacing } from './spacing'
@@ -14,6 +15,7 @@ export const defaultTheme = {
   dimensions,
   fonts,
   spacing,
+  fontSizes,
   changeTheme: (theme: ThemeName) => {
     theme
   },

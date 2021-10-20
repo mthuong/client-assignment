@@ -2,22 +2,22 @@ import { TextStyle } from 'react-native'
 
 const fonts = {
   regular: {
-    // fontFamily: 'sans-serif',
+    fontFamily: 'Roboto',
   } as TextStyle,
   bold: {
-    // fontFamily: 'sans-serif-medium',
+    fontFamily: 'Roboto-Bold',
     fontWeight: 'bold',
   } as TextStyle,
   medium: {
-    // fontFamily: 'sans-serif-medium',
+    fontFamily: 'Roboto-Medium',
     fontWeight: '300',
   } as TextStyle,
   light: {
-    // fontFamily: 'sans-serif-light',
+    fontFamily: 'Roboto-Light',
     fontWeight: '200',
   } as TextStyle,
   thin: {
-    // fontFamily: 'sans-serif-thin',
+    fontFamily: 'Roboto-Thin',
     fontWeight: '100',
   } as TextStyle,
 } as const
