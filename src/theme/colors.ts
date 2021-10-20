@@ -4,11 +4,13 @@ export const LightTheme = {
   backgroundColor: '#ffffff',
   transparent: '#00000000',
 
-  primary: '#53B175',
+  primary: '#3AC5C9',
 
-  primaryText: '#000000',
-  secondaryText: '#999898',
-  tertiaryText: '#ffffff',
+  primaryText: '#141619',
+  secondaryText: '#646D7A',
+  tertiaryText: '#2B343D',
+  fourthText: '#7F8893',
+
   errorText: '#FE3B2F',
   placeholder: '#999898',
 
@@ -18,7 +20,7 @@ export const LightTheme = {
   line: '#999898',
   disabled: '#999898',
 
-  primaryButton: '#53B175',
+  primaryButton: '#3AC5C9',
   secondaryButton: '#F2F3F2',
 
   borderColor: '#999898',

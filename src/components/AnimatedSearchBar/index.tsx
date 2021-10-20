@@ -30,8 +30,8 @@ type useAnimatedSearchBarType = [
   (nativeEvent: NativeScrollEvent) => void
 ]
 
-export const useAnimatedSearchBar = (): useAnimatedSearchBarType => {
-  const scrollY = React.useRef(new Animated.Value(0)).current
+export const useAnimatedSearchBar = (y = 0): useAnimatedSearchBarType => {
+  const scrollY = React.useRef(new Animated.Value(y)).current
   const diffClamp = Animated.diffClamp(scrollY, 0, 100)
 
   const translateY = diffClamp.interpolate({

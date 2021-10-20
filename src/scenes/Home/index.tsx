@@ -1,18 +1,19 @@
-import React from 'react'
-import {
-  Animated,
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import React, { useCallback, useEffect } from 'react'
+import { Animated, FlatList, RefreshControl, StyleSheet } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 import AnimatedSearchBar, {
   useAnimatedSearchBar,
 } from 'components/AnimatedSearchBar'
 import { Separator } from 'components/separator'
+import { Restaurant } from 'models/restaurant'
+import { HomeHeader } from 'scenes/Home/components/HomeHeader'
+import { useAppDispatch, useAppSelector } from 'stores/hook'
+import { restaurantAsyncActions } from 'stores/restaurantReducer'
+import restaurantSelectors from 'stores/restaurantSelectors'
 import { Theme, useTheme } from 'theme'
+import { IconInbox, IconLocationFilled, IconMenu } from 'theme/svg'
+
+import RestaurantRow from './components/RestaurantRow'
 
 // type HomeScreenNavigationProp = StackNavigationProp<
 //   RootStackParamList,
@@ -25,29 +26,47 @@ import { Theme, useTheme } from 'theme'
 //   route: HomeScreenRoute
 // }
 
-const data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-
 export function HomeScreen() {
   const styles = useStyles(useTheme())
-
   const [translateY, marginTop, opacity, setScrollY] = useAnimatedSearchBar()
+  const restaurants = useAppSelector(restaurantSelectors.getRestaurantsNearBy)
+  const page = useAppSelector(restaurantSelectors.getRestaurantPage)
+  const dispatch = useAppDispatch()
 
-  const renderItem = ({ item }: { item: string }) => {
-    return (
-      <View key={item} style={styles.card}>
-        <Text>{`Card ${item}`}</Text>
-      </View>
+  const getData = useCallback(() => {
+    console.log('getRestaurantsNearYou')
+    dispatch(
+      restaurantAsyncActions.getRestaurantsNearYou({
+        latitude: 10.8621592,
+        longitude: 106.7588497,
+        page: page + 1,
+      })
     )
+  }, [dispatch, page])
+
+  useEffect(() => {
+    getData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const renderItem = ({ item }: { item: Restaurant }) => {
+    return <RestaurantRow key={item.id} url={item.url} />
   }
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
+        <HomeHeader
+          leftIcon={<IconLocationFilled />}
+          title='Current Location'
+          subRightIcon={<IconInbox />}
+          rightIcon={<IconMenu />}
+        />
         <AnimatedSearchBar transform={[{ translateY }]} opacity={opacity} />
         <Animated.View style={[styles.innerContainer, { marginTop }]}>
           <Separator />
-          <FlatList
-            contentContainerStyle={{ marginTop: 10 }}
+          <FlatList<Restaurant>
+            contentContainerStyle={styles.flatList}
             refreshControl={
               <RefreshControl
                 onRefresh={() => {
@@ -56,8 +75,8 @@ export function HomeScreen() {
                 refreshing={false}
               />
             }
-            data={data}
-            keyExtractor={item => item}
+            data={restaurants}
+            keyExtractor={item => item.id}
             scrollEventThrottle={16}
             renderItem={renderItem}
             onScroll={e => {
@@ -81,13 +100,6 @@ const useStyles = (theme: Theme) => {
       height: '100%',
     },
 
-    card: {
-      width: '90%',
-      height: 100,
-      borderRadius: theme.spacing[3],
-      marginBottom: theme.spacing[4],
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
+    flatList: {},
   })
 }

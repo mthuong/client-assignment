@@ -5,11 +5,13 @@ import {
 } from '@reduxjs/toolkit'
 
 import authReducer from './authReducer'
+import restaurantReducer from './restaurantReducer'
 import snackbarReducer from './snackbarReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   snackbar: snackbarReducer,
+  restaurant: restaurantReducer,
 })
 
 const store = configureStore({
@@ -17,7 +19,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware({
     immutableCheck: false,
     serializableCheck: {
-      ignoredActions: ['signUp/fulfilled', 'signIn/fulfilled'],
+      ignoredActions: [],
       // Ignore these field paths in all actions
       ignoredActionPaths: [],
       // Ignore these paths in the state

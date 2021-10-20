@@ -9,3 +9,8 @@ export type ISignIn = {
   email?: string
   password?: string
 }
+
+export type GenericResponse = {
+  totalPage: number
+  page: number
+}
