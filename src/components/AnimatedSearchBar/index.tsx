@@ -103,7 +103,11 @@ const AnimatedSearchBar = ({ transform, opacity }: AnimatedHeaderProps) => {
       ]}>
       <View style={[styles.searchBar]}>
         <IconSearch />
-        <TextInput style={styles.input} placeholder={t('home:Search')} />
+        <TextInput
+          style={styles.input}
+          placeholder={t('home:Search')}
+          clearButtonMode='unless-editing'
+        />
       </View>
     </Animated.View>
   )
@@ -116,10 +120,11 @@ const useStyles = (theme: Theme) => {
     header: {
       zIndex: 100,
       paddingVertical: theme.spacing[2],
+      paddingHorizontal: theme.spacing[4],
       width: '100%',
     },
     searchBar: {
-      marginHorizontal: theme.spacing[4],
+      paddingHorizontal: theme.spacing[5],
       height: theme.spacing[6],
       borderRadius: theme.spacing[4],
       justifyContent: 'center',
@@ -129,7 +134,7 @@ const useStyles = (theme: Theme) => {
     },
     input: {
       ...theme.fonts.regular,
-      fontSize: theme.fontSizes.sm,
+      fontSize: theme.fontSizes.md,
       minWidth: '50%',
     },
   })
