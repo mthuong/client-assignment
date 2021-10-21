@@ -5,6 +5,7 @@ import {
   MatrixTransform,
   NativeScrollEvent,
   PerpectiveTransform,
+  Platform,
   RotateTransform,
   RotateXTransform,
   RotateYTransform,
@@ -125,7 +126,10 @@ const useStyles = (theme: Theme) => {
     },
     searchBar: {
       paddingHorizontal: theme.spacing[5],
-      height: theme.spacing[6],
+      height: Platform.select({
+        ios: theme.spacing[6],
+        android: theme.spacing[7],
+      }),
       borderRadius: theme.spacing[4],
       justifyContent: 'center',
       alignItems: 'center',

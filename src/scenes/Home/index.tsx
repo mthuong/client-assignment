@@ -5,6 +5,8 @@ import AnimatedSearchBar, {
   useAnimatedSearchBar,
 } from 'components/AnimatedSearchBar'
 import { Separator } from 'components/separator'
+import useLocation from 'hook/useLocation'
+import useLocationAddress from 'hook/useLocationAddress'
 import { Restaurant } from 'models/restaurant'
 import { HomeHeader } from 'scenes/Home/components/HomeHeader'
 import { useAppDispatch, useAppSelector } from 'stores/hook'
@@ -32,25 +34,41 @@ export function HomeScreen() {
   const restaurants = useAppSelector(restaurantSelectors.getRestaurantsNearBy)
   const page = useAppSelector(restaurantSelectors.getRestaurantPage)
   const dispatch = useAppDispatch()
+  const [location] = useLocation({})
+  const [address] = useLocationAddress({
+    location: location?.coords,
+  })
 
   const getData = useCallback(() => {
-    console.log('getRestaurantsNearYou')
-    dispatch(
-      restaurantAsyncActions.getRestaurantsNearYou({
-        latitude: 10.8621592,
-        longitude: 106.7588497,
-        page: page + 1,
-      })
-    )
-  }, [dispatch, page])
+    if (location) {
+      dispatch(
+        restaurantAsyncActions.getRestaurantsNearYou({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          page: page + 1,
+        })
+      )
+    }
+  }, [dispatch, location, page])
 
   useEffect(() => {
     getData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [location])
 
   const renderItem = ({ item }: { item: Restaurant }) => {
-    return <RestaurantRow key={item.id} url={item.url} />
+    return (
+      <RestaurantRow
+        key={item.id}
+        url={item.url}
+        name={item.name}
+        address={item.address}
+        menu={item.menu}
+        rating={item.rating}
+        numberOfRating={item.numberOfRating}
+        location={location?.coords}
+      />
+    )
   }
 
   return (
@@ -58,7 +76,7 @@ export function HomeScreen() {
       <SafeAreaView style={styles.container}>
         <HomeHeader
           leftIcon={<IconLocationFilled />}
-          title='Current Location'
+          title={address}
           subRightIcon={<IconInbox />}
           rightIcon={<IconMenu />}
         />

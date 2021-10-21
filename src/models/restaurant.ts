@@ -1,3 +1,5 @@
+import { GeoCoordinates } from 'react-native-geolocation-service'
+
 export interface Restaurant {
   id: string
   url: string
@@ -5,14 +7,9 @@ export interface Restaurant {
   address: string
   rating: number
   numberOfRating: number
-  location: Location
+  location?: GeoCoordinates
 
   menu: Food[]
-}
-
-export type Location = {
-  latitude: string
-  longitude: string
 }
 
 export type Food = {

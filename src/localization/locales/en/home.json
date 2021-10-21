@@ -1,3 +1,10 @@
 {
-  "Search": "Search for a restaurant or menu"
+  "Search": "Search for a restaurant or menu",
+  "TurnOnLocationPermission": "Turn on Location Services to allow \"The App\" to determine your location.",
+  "GoToSettings": "Go to Settings",
+  "DontUseLocation": "Don't Use Location",
+  "LocationPermissionDenied": "Location permission denied",
+  "UnableOpenSettings": "Unable to open settings",
+  "LocationPermissionDeniedByUser": "Location permission denied by user.",
+  "CanNotGetAddress": "Can't get address"
 }

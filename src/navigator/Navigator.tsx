@@ -71,7 +71,9 @@ function Navigator(props: NavigationProps) {
           onReady={() => {
             navigationState.isReady = true
           }}>
-          <MainStack.Navigator screenOptions={{ headerShown: false }}>
+          <MainStack.Navigator
+            screenOptions={{ headerShown: false }}
+            headerMode='none'>
             <>
               <MainStack.Screen
                 name={NAV_SCREENS.Home}
@@ -91,8 +93,7 @@ function Navigator(props: NavigationProps) {
   )
 }
 
-const mapStateToProps = () => ({
-})
+const mapStateToProps = () => ({})
 
 export default connect(mapStateToProps)(Navigator)
 
